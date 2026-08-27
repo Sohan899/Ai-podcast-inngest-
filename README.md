@@ -113,3 +113,44 @@ Videos used for testing / thumbnail
 MI6 Secret Agent Talks About the World's Darkest Secrets
 
 Janney Sanchez | Therapy saved my life, From Rivera to 
+
+## A Basic required idea about how i am clippin gthe viddeo tracks
+# 1. Mock tracking data for two detected faces across 3 video frames
+tracks = [
+    {"track": {"frame": [0, 1, 2]}, "person": "Host"},    # Track 0
+    {"track": {"frame": [0, 1, 2]}, "person": "Guest"},   # Track 1
+]
+
+# 2. Parallel array of speaking-confidence scores for each track per frame
+scores = [
+    [0.85, 0.92, 0.88],  # Scores for Track 0 (Host is speaking)
+    [0.10, 0.05, 0.12],  # Scores for Track 1 (Guest is silent)
+]
+
+# 3. Loop using enumerate to process each track alongside its matching score array
+for tidx, track in enumerate(tracks):
+    score_array = scores[tidx]  # Fetch matching scores: scores[0] for Track 0, scores[1] for Track 1
+    person_label = track["person"]
+    
+    print(f"Processing Track {tidx} ({person_label}):")
+
+    # Loop through each frame in the current track
+    for fidx, frame in enumerate(track["track"]["frame"]):
+        frame_score = score_array[fidx]
+        print(f"  Frame {frame}: Active Speaker Score = {frame_score}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
